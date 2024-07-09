@@ -1,4 +1,6 @@
-export const Event = (props) => {
+import { memo } from 'react';
+
+export const Event = memo((props) => {
     const { slim, icon, iconLabel, title, subtitle } = props;
     
     return <li className={'event' + (slim ? ' event_slim' : '')}>
@@ -11,4 +13,4 @@ export const Event = (props) => {
             }
         </button>
     </li>;
-}
+});
