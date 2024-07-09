@@ -11,9 +11,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
 <div id="app"></div>
-
 <footer class="footer">
     <ul class="footer__list">
         <li class="footer__item">
@@ -34,7 +32,6 @@
         © 1997–2023 ООО «Яндекс»
     </div>
 </footer>
-
 <script src="vendors/babel.min.js"></script>
 <script type="text/babel">
     function Header() {
@@ -219,14 +216,10 @@
             }
         });
         
-        const onSelectInput = event => {
-            setActiveTab(event.target.value);
-        };
-        
         let sizes = [];
         const onSize = size => {
-            sizes = [...sizes, size];
-        };
+            sizes.push(size);
+        }
         
         React.useEffect(() => {
             const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
@@ -340,14 +333,6 @@
                     <h2 className="section__title-header">
                         Избранные устройства
                     </h2>
-                    
-                    <select className="section__select" defaultValue="all" onInput={onSelectInput}>
-                        {TABS_KEYS.map(key =>
-                            <option key={key} value={key}>
-                                {TABS[key].title}
-                            </option>
-                        )}
-                    </select>
                     
                     <ul role="tablist" className="section__tabs">
                         {TABS_KEYS.map(key =>
