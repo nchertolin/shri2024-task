@@ -76,12 +76,11 @@
         const { onSize } = props;
         
         React.useEffect(() => {
-            const width = ref.current.offsetWidth;
-            const height = ref.current.offsetHeight;
+            const { offsetWidth: width, offsetHeight: height } = ref.current;
             if (onSize) {
                 onSize({ width, height });
             }
-        });
+        }, [ref.current, onSize]);
         
         return <li ref={ref} className={'event' + (props.slim ? ' event_slim' : '')}>
             <button className="event__button">
@@ -202,9 +201,9 @@
             }]
         }
     };
-    // for (let i = 0; i < 6; ++i) {
-    //     TABS.all.items = [...TABS.all.items, ...TABS.all.items];
-    // }
+    for (let i = 0; i < 6; i++) {
+        TABS.all.items = [].concat(TABS.all.items, TABS.all.items);
+    }
     const TABS_KEYS = Object.keys(TABS);
     
     function Main() {
@@ -236,15 +235,12 @@
             if (newHasRightScroll !== hasRightScroll) {
                 setHasRightScroll(newHasRightScroll);
             }
-        });
+        }, [sizes, hasRightScroll]);
         
         const onArrowCLick = () => {
             const scroller = ref.current.querySelector('.section__panel:not(.section__panel_hidden)');
             if (scroller) {
-                scroller.scrollTo({
-                    left: scroller.scrollLeft + 400,
-                    behavior: 'smooth'
-                });
+                scroller.scrollBy({ left: 400, behavior: 'smooth' });
             }
         };
         
